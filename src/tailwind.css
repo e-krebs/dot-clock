@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+  --color-theme: theme(--color-gray-500);
+  --color-theme-bg: theme(--color-gray-100);
+  --color-theme-bg-lighter: theme(--color-white);
+
+  --shadow-dot-scale: 0.35;
+  --shadow-dot-size: 6px;
+  --shadow-dot-angle-deg: 45;
+  --shadow-dot-down-scale: 0.1;
+  --shadow-dot-concave-scale: 2;
+
+  --shadow-dot-alpha: calc(50% - var(--shadow-dot-scale) * 25%);
+  --shadow-dot-angle: calc((var(--shadow-dot-angle-deg)) * pi / 180);
+
+  --shadow-dot-X: calc(
+    sin(var(--shadow-dot-angle)) * var(--shadow-dot-size) * var(--shadow-dot-scale)
+  );
+  --shadow-dot-Y: calc(
+    cos(var(--shadow-dot-angle)) * var(--shadow-dot-size) * var(--shadow-dot-scale)
+  );
+  --shadow-dot-blur-radius: calc(var(--shadow-dot-size) * var(--shadow-dot-scale));
+  --shadow-dot-full-color: color-mix(
+    in oklab,
+    var(--color-theme) var(--shadow-dot-alpha),
+    transparent
+  );
+
+  --shadow-dot-up: var(--shadow-dot-X) var(--shadow-dot-Y) var(--shadow-dot-blur-radius)
+      var(--shadow-dot-full-color),
+    var(--shadow-dot-size) var(--shadow-dot-size)
+      calc(var(--shadow-dot-concave-scale) * var(--shadow-dot-size)) var(--shadow-dot-full-color),
+    calc(-1 * var(--shadow-dot-size)) calc(-1 * var(--shadow-dot-size))
+      calc(var(--shadow-dot-concave-scale) * var(--shadow-dot-size)) var(--color-theme-bg);
+
+  --shadow-dot-down: calc(var(--shadow-dot-X) * var(--shadow-dot-down-scale))
+      calc(var(--shadow-dot-Y) * var(--shadow-dot-down-scale))
+      calc(var(--shadow-dot-blur-radius) * var(--shadow-dot-down-scale))
+      var(--shadow-dot-full-color),
+    calc(var(--shadow-dot-size) * var(--shadow-dot-down-scale))
+      calc(var(--shadow-dot-size) * var(--shadow-dot-down-scale))
+      calc(var(--shadow-dot-concave-scale) * var(--shadow-dot-size) * var(--shadow-dot-down-scale))
+      var(--shadow-dot-full-color),
+    calc(-1 * var(--shadow-dot-size) * var(--shadow-dot-down-scale))
+      calc(-1 * var(--shadow-dot-size) * var(--shadow-dot-down-scale))
+      calc(var(--shadow-dot-concave-scale) * var(--shadow-dot-size) * var(--shadow-dot-down-scale))
+      var(--color-theme-bg);
+}
+
+@layer base {
+  body {
+    @apply bg-theme-bg/50 text-theme;
+  }
+}
