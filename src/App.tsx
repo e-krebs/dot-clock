@@ -39,7 +39,12 @@ export const App = () => {
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] flex min-w-max gap-14">
+      <div
+        className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]
+          scale-50 xs:scale-75 s:scale-90 m:scale-95 l:scale-none
+          p-14 grid grid-cols-2 grid-rows-2 xl:flex gap-14 min-w-max
+          *:nth-3:hidden xl:*:nth-3:grid"
+      >
         <Char char={time[0]} key="first" />
         <Char char={time[1]} key="second" />
         <Char char={time[2]} key="third" blink />
