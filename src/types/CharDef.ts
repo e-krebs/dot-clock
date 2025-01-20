@@ -123,10 +123,10 @@ const nine: CharDef = [
 ] as const;
 
 export type DigitDef = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+export type Chars = DigitDef | "" | "colon";
 
 export const chars = {
   "": blank,
-  undefined: blank,
   0: zero,
   1: one,
   2: two,
@@ -138,6 +138,4 @@ export const chars = {
   8: eight,
   9: nine,
   colon,
-} as const;
-
-export type Chars = keyof typeof chars | undefined;
+} satisfies Record<Chars, CharDef>;
