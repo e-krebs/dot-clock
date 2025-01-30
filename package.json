@@ -1,7 +1,7 @@
 {
   "name": "dot-clock",
   "description": "a nice looking clock based on button/dots",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "repository": {
     "type": "git",
