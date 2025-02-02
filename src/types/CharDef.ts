@@ -122,8 +122,8 @@ const nine: CharDef = [
   [, 1, 1, 1, ,],
 ] as const;
 
-export type DigitDef = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
-export type Chars = DigitDef | "" | "colon";
+export type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+export type Chars = Digit | "" | "colon";
 
 export const chars = {
   "": blank,
