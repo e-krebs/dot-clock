@@ -1,1 +1,2 @@
-export * from "./useRepeatEverySecond";
+export * from "./getTime";
+export * from "./useRepeatEvery";
