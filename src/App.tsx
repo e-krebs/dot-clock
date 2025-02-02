@@ -1,22 +1,34 @@
 import { Reducer, useReducer } from "react";
 import { Char } from "./components";
-import { getTime, type Time, useRepeatEvery } from "./utils";
+import { getCurrentTime, type Time, useRepeatEvery } from "./utils";
+import { type Chars } from "./types";
 
-interface State {
-  on: boolean;
-  time: Time;
+interface State extends Time {
+  _state: boolean;
+  colon: Chars;
 }
 
-const initialState = { on: false, time: ["", "", "", "", "", ""] } satisfies State;
-const stateReducer: Reducer<State, Time> = (state, time): State => ({
-  on: !state.on,
-  time,
+const initialState = {
+  _state: false,
+  colon: "",
+  hour: ["", ""],
+  minutes: ["", ""],
+  seconds: ["", ""],
+} satisfies State;
+
+const stateReducer: Reducer<State, Time> = ({ _state }, time): State => ({
+  ...time,
+  _state: !_state,
+  colon: !_state ? "colon" : "",
 });
 
 export const App = () => {
-  const [{ on, time }, setTime] = useReducer<State, [Time]>(stateReducer, initialState);
+  const [{ colon, hour, minutes, seconds }, setTime] = useReducer<State, [Time]>(
+    stateReducer,
+    initialState
+  );
 
-  useRepeatEvery(() => setTime(getTime(new Date())), "second");
+  useRepeatEvery(() => setTime(getCurrentTime()), "second");
 
   return (
     <div className="w-full h-dvh flex items-center justify-center">
@@ -27,14 +39,14 @@ export const App = () => {
           p-14 grid grid-cols-2 grid-rows-2 xl:flex landscape:flex gap-14 min-w-max
           *:nth-3:hidden xl:*:nth-3:grid landscape:*:nth-3:grid"
       >
-        <Char char={time[0]} size="m" key="first" />
-        <Char char={time[1]} size="m" key="second" />
-        <Char char={on ? "colon" : ""} size="m" key="third" />
-        <Char char={time[2]} size="m" key="fourth" />
-        <Char char={time[3]} size="m" key="fifth" />
+        <Char char={hour[0]} key="first" />
+        <Char char={hour[1]} key="second" />
+        <Char char={colon} key="third" />
+        <Char char={minutes[0]} key="fourth" />
+        <Char char={minutes[1]} key="fifth" />
         <div className="absolute -bottom-35 right-14 flex gap-7">
-          <Char char={time[4]} size="s" key="sixth" />
-          <Char char={time[5]} size="s" key="seventh" />
+          <Char char={seconds[0]} size="s" key="sixth" />
+          <Char char={seconds[1]} size="s" key="seventh" />
         </div>
       </div>
     </div>
