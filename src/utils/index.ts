@@ -1,1 +1,1 @@
-export * from "./useRepeatEverySecond";
+export * from "./useRepeatEvery";
