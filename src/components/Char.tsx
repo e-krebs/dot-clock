@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 import { type Chars, type DotSize } from "../types";
 
 interface CharProps {
@@ -8,7 +10,7 @@ interface CharProps {
 const dotClassName = `shadow-dot-down in-data-[size=m]:size-10 in-data-[size=s]:size-4.5 rounded-full
                       bg-linear-45 from-theme-bg to-theme-bg-lighter transition-all duration-1000`;
 
-export const Char = ({ char, size = "m" }: CharProps) => (
+const CharComponent = ({ char, size = "m" }: CharProps) => (
   <div
     className="grid grid-cols-5 data-[size=m]:gap-2 data-[size=s]:gap-1 w-fit"
     data-size={size}
@@ -228,3 +230,5 @@ export const Char = ({ char, size = "m" }: CharProps) => (
     />
   </div>
 );
+
+export const Char = memo(CharComponent);
