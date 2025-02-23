@@ -6,10 +6,11 @@ export interface Time {
   seconds: [Chars, Chars];
 }
 
-const getTwoDigits = (timePart: number): [Digit, Digit] => [
-  Math.trunc(timePart / 10) as Digit, // ten
-  (timePart % 10) as Digit, // unit
-];
+const getTwoDigits = (timePart: number): [Digit, Digit] => {
+  const quotient = ~(timePart / 10) as Digit;
+  const remainder = (timePart - quotient) as Digit;
+  return [quotient, remainder];
+};
 
 const getTime = (time: Date): Time => ({
   hour: getTwoDigits(time.getHours()),
