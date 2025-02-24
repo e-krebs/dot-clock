@@ -7,8 +7,8 @@ export interface Time {
 }
 
 const getTwoDigits = (timePart: number): [Digit, Digit] => {
-  const quotient = ~(timePart / 10) as Digit;
-  const remainder = (timePart - quotient) as Digit;
+  const quotient = ~~(timePart / 10) as Digit;
+  const remainder = (timePart - quotient * 10) as Digit;
   return [quotient, remainder];
 };
 
